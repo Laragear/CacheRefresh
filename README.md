@@ -28,7 +28,7 @@ public function send(Message $message)
 [![](.assets/patreon.png)](https://patreon.com/packagesforlaravel)[![](.assets/ko-fi.png)](https://ko-fi.com/DarkGhostHunter)[![](.assets/buymeacoffee.png)](https://www.buymeacoffee.com/darkghosthunter)[![](.assets/paypal.png)](https://www.paypal.com/paypalme/darkghosthunter)
 
 Your support allows me to keep this package free, up-to-date and maintainable. Alternatively, you
-can **[spread the word!](http://twitter.com/share?text=I%20am%20using%20this%20cool%20PHP%20package&url=https://github.com%2FLaragear%2FCache%2FRefresh&hashtags=PHP,Laravel)**
+can **[spread the word!](http://twitter.com/share?text=I%20am%20using%20this%20cool%20PHP%20package&url=https://github.com%2FLaragear%2FCacheRefresh&hashtags=PHP,Laravel)**
 
 ## Requirements
 
