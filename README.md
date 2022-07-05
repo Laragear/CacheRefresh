@@ -2,8 +2,8 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/laragear/cache-refresh.svg)](https://packagist.org/packages/laragear/cache-refresh)
 [![Latest stable test run](https://github.com/Laragear/CacheRefresh/workflows/Tests/badge.svg)](https://github.com/Laragear/CacheRefresh/actions)
-[![Codecov coverage](https://codecov.io/gh/Laragear/Refresh/branch/1.x/graph/badge.svg?token=token)](https://codecov.io/gh/Laragear/CacheRefresh)
-[![Maintainability](https://api.codeclimate.com/v1/badges/token/maintainability)](https://codeclimate.com/github/Laragear/CacheRefresh/maintainability)
+[![Codecov coverage](https://codecov.io/gh/Laragear/Refresh/branch/1.x/graph/badge.svg?token=OUUWluNbr6)](https://codecov.io/gh/Laragear/CacheRefresh)
+[![Maintainability](https://api.codeclimate.com/v1/badges/6fb0cc168f26b3f245bc/maintainability)](https://codeclimate.com/github/Laragear/CacheRefresh/maintainability)
 [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=Laragear_CacheRefresh&metric=alert_status)](https://sonarcloud.io/dashboard?id=Laragear_CacheRefresh)
 [![Laravel Octane Compatibility](https://img.shields.io/badge/Laravel%20Octane-Compatible-success?style=flat&logo=laravel)](https://laravel.com/docs/9.x/octane#introduction)
 
