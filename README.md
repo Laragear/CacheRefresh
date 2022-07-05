@@ -34,9 +34,9 @@ can **[spread the word!](http://twitter.com/share?text=I%20am%20using%20this%20c
 
 * Laravel 9.x, or later
 * PHP 8.0 or later
-* Cache Driver with Lock support ^*.
+* Cache Driver with Lock support (*).
 
-> ^* You can still use Cache Refresh without a driver that supports locking, but bear in mind, **refreshing won't be atomic**.
+> (*) You can still use Cache Refresh without a driver that supports locking, but bear in mind, **refreshing won't be atomic**.
 
 ## Installation
 
