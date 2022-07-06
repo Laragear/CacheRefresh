@@ -73,7 +73,7 @@ class Refresh
      * @param  \DateTimeInterface|\DateInterval|int|null  $ttl
      * @return TValue|mixed
      */
-    public function put(callable $callback, DateTimeInterface|DateInterval|int|null $ttl = null): mixed
+    public function put(Closure $callback, DateTimeInterface|DateInterval|int|null $ttl = null): mixed
     {
         [$this->callback, $this->ttl] = [$callback, $ttl ?? $this->ttl];
 
