@@ -103,9 +103,7 @@ class Refresh
 
         $exists = $item !== null;
 
-        $result = ($this->callback)($item, $expire);
-
-        return tap($result, function ($result) use ($expire, $exists): void {
+        return tap(($this->callback)($item, $expire), function (mixed $result) use ($expire, $exists): void {
             // We will call the cache store only on two cases: when this callback returns
             // something to be put, and when there is something to forget in the cache.
             // This way we can save a cache call when there is nothing to manipulate.
