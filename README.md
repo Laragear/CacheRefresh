@@ -62,7 +62,7 @@ public function send(Message $message)
     // Add the incoming message to a list of messages, refreshing the overall list.
     $messages = Cache::refresh(
         $message->to,
-        function (?Collection $messages) {
+        function (?Collection $messages) use ($message) {
             return Collection::wrap($messages)->push($message);
         },
         60 * 5
