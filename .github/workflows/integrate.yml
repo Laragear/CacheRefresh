@@ -142,3 +142,19 @@ jobs:
 
       - name: "Check coding style"
         run: "composer exec -- php-cs-fixer fix --dry-run --diff --rules=@PSR12 src/"
+
+  exported_files:
+    name: "5️⃣ Exported files"
+    needs:
+      - "byte_level"
+      - "syntax_errors"
+    runs-on: "ubuntu-20.04"
+    steps:
+      - name: "Checkout code"
+        uses: "actions/checkout@v3"
+
+      - name: "Check exported files"
+        run: |
+          EXPECTED="LICENSE.md,README.md,composer.json"
+          CURRENT="$(git archive HEAD | tar --list --exclude="src" --exclude="src/*" | paste -s -d ",")"
+          test "${CURRENT}" == "${EXPECTED}"
