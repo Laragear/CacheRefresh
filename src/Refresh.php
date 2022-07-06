@@ -69,7 +69,7 @@ class Refresh
     /**
      * Retrieves and refreshes the item from the cache through a callback.
      *
-     * @param  callable(): (TValue|null|mixed)  $callback
+     * @param  callable(mixed, \Laragear\CacheRefresh\Expire): (TValue|null)  $callback
      * @param  \DateTimeInterface|\DateInterval|int|null  $ttl
      * @return TValue|mixed
      */
@@ -93,7 +93,7 @@ class Refresh
     /**
      * Executes the refresh operation.
      *
-     * @return TValue|mixed
+     * @return TValue
      */
     protected function refresh(): mixed
     {
