@@ -75,7 +75,7 @@ class Refresh
      */
     public function put(callable $callback, DateTimeInterface|DateInterval|int|null $ttl = null): mixed
     {
-        [$this->callback, $this->ttl] = [$callback, $ttl];
+        [$this->callback, $this->ttl] = [$callback, $ttl ?? $this->ttl];
 
         $store = $this->repository->getStore();
 
