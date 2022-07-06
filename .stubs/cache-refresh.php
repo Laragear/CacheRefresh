@@ -21,7 +21,7 @@ namespace Illuminate\Cache
          * Refreshing is not an atomic operation on cache stores that do not support locking.
          *
          * @param  string  $key
-         * @param  \Closure|null  $callback
+         * @param  \Closure<mixed|null,\Laragear\CacheRefresh\Expire>|null  $callback
          * @param  \DateTimeInterface|\DateInterval|int|null  $ttl
          * @return \Laragear\CacheRefresh\Refresh|mixed
          */

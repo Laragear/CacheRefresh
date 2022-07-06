@@ -21,7 +21,7 @@ class Refresh
      * @param  \DateTimeInterface|\DateInterval|int|null  $ttl
      * @param  string  $name
      * @param  string  $owner
-     * @param  \Closure<TValue>|null  $callback
+     * @param  \Closure<TValue|mixed|null,\Laragear\CacheRefresh\Expire>|null  $callback
      * @param  int  $wait
      * @param  int  $seconds
      */
@@ -69,7 +69,7 @@ class Refresh
     /**
      * Retrieves and refreshes the item from the cache through a callback.
      *
-     * @param  callable<TValue|null|mixed,\Laragear\CacheRefresh\Expire>  $callback
+     * @param  \Closure<TValue|null|mixed,\Laragear\CacheRefresh\Expire>  $callback
      * @param  \DateTimeInterface|\DateInterval|int|null  $ttl
      * @return TValue|mixed
      */
@@ -93,7 +93,7 @@ class Refresh
     /**
      * Executes the refresh operation.
      *
-     * @return TValue|mixed
+     * @return TValue|mixed|null
      */
     protected function refresh(): mixed
     {
