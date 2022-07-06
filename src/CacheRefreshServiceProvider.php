@@ -27,7 +27,7 @@ class CacheRefreshServiceProvider extends ServiceProvider
 
                 return $callback ? $operation->put($callback, $ttl) : $operation;
             }
-         );
+        );M
 
         if ($this->app->runningInConsole()) {
             $this->publishes([static::STUBS => $this->app->basePath('.stubs/cache-refresh.php')], 'phpstorm');
