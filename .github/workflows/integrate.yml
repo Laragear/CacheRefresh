@@ -157,4 +157,6 @@ jobs:
         run: |
           EXPECTED="LICENSE.md,README.md,composer.json"
           CURRENT="$(git archive HEAD | tar --list --exclude="src" --exclude="src/*" | paste -s -d ",")"
+          echo "CURRENT =${CURRENT}"
+          echo "EXPECTED=${EXPECTED}"
           test "${CURRENT}" == "${EXPECTED}"
