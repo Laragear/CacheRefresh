@@ -18,7 +18,7 @@ class Refresh
      *
      * @param  \Illuminate\Contracts\Cache\Repository  $repository
      * @param  string  $key
-     * @param  int  $ttl
+     * @param  \DateTimeInterface|\DateInterval|int|null  $ttl
      * @param  string  $name
      * @param  string  $owner
      * @param  \Closure<TValue>|null  $callback
@@ -28,7 +28,7 @@ class Refresh
     public function __construct(
         protected Repository $repository,
         protected string $key,
-        protected ?int $ttl = null,
+        protected DateTimeInterface|DateInterval|int|null $ttl = null,
         protected string $name = '',
         protected string $owner = '',
         protected ?Closure $callback = null,
