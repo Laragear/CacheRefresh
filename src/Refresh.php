@@ -9,7 +9,7 @@ use Illuminate\Contracts\Cache\LockProvider;
 use Illuminate\Contracts\Cache\Repository;
 
 /**
- * @template TValue of value being refreshed.
+ * @template TValue  Value being refreshed.
  */
 class Refresh
 {
@@ -21,7 +21,7 @@ class Refresh
      * @param  \DateTimeInterface|\DateInterval|int|null  $ttl
      * @param  string  $name
      * @param  string  $owner
-     * @param  \Closure<TValue>|null  $callback
+     * @param  \Closure(mixed, \Laragear\CacheRefresh\Expire): TValue|null  $callback
      * @param  int  $wait
      * @param  int  $seconds
      */
@@ -69,7 +69,7 @@ class Refresh
     /**
      * Retrieves and refreshes the item from the cache through a callback.
      *
-     * @param  callable<TValue|null|mixed>  $callback
+     * @param  callable(): (TValue|null|mixed)  $callback
      * @param  \DateTimeInterface|\DateInterval|int|null  $ttl
      * @return TValue|mixed
      */
