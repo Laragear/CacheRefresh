@@ -24,7 +24,7 @@ namespace Illuminate\Cache
          * @param  string  $key
          * @param  (\Closure(TValue|mixed|null, \Laragear\CacheRefresh\Expire>):TValue)|null  $callback
          * @param  \DateTimeInterface|\DateInterval|int|null  $ttl
-         * @return \Laragear\CacheRefresh\Refresh|TValue|mixed
+         * @return \Laragear\CacheRefresh\Refresh<TValue>|TValue|mixed
          */
         public function refresh(
             string $key,
