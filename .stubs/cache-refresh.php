@@ -20,10 +20,11 @@ namespace Illuminate\Cache
          *
          * Refreshing is not an atomic operation on cache stores that do not support locking.
          *
+         * @template TValue The Value being refreshed.
          * @param  string  $key
-         * @param  \Closure<mixed|null,\Laragear\CacheRefresh\Expire>|null  $callback
+         * @param  (\Closure(TValue|mixed|null, \Laragear\CacheRefresh\Expire>):TValue)|null  $callback
          * @param  \DateTimeInterface|\DateInterval|int|null  $ttl
-         * @return \Laragear\CacheRefresh\Refresh|mixed
+         * @return \Laragear\CacheRefresh\Refresh|TValue|mixed
          */
         public function refresh(
             string $key,
