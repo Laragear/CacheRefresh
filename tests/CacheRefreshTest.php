@@ -73,6 +73,15 @@ class CacheRefreshTest extends TestCase
         static::assertSame('quz', $result);
     }
 
+    public function test_refreshes_with_lock_provider(): void
+    {
+        $result = cache()->store('array')->refresh('foo', function ($item) {
+            return $item ?? 'new';
+        });
+
+        static::assertSame('new', $result);
+    }
+
     public function test_refresh_puts_non_existing_item_forever_by_default(): void
     {
         $repo = $this->getRepositoryWithLockProvider();
