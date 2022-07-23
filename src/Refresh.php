@@ -9,7 +9,7 @@ use Illuminate\Contracts\Cache\LockProvider;
 use Illuminate\Contracts\Cache\Repository;
 
 /**
- * @template TValue of value being refreshed.
+ * @template TValue The value being refreshed
  */
 class Refresh
 {
@@ -21,7 +21,7 @@ class Refresh
      * @param  \DateTimeInterface|\DateInterval|int|null  $ttl
      * @param  string  $name
      * @param  string  $owner
-     * @param  \Closure<TValue|mixed|null,\Laragear\CacheRefresh\Expire>|null  $callback
+     * @param  (\Closure(TValue|mixed|null, \Laragear\CacheRefresh\Expire):TValue)|null  $callback
      * @param  int  $wait
      * @param  int  $seconds
      */
@@ -69,7 +69,7 @@ class Refresh
     /**
      * Retrieves and refreshes the item from the cache through a callback.
      *
-     * @param  \Closure<TValue|null|mixed,\Laragear\CacheRefresh\Expire>  $callback
+     * @param  \Closure(TValue|null|mixed, \Laragear\CacheRefresh\Expire): TValue  $callback
      * @param  \DateTimeInterface|\DateInterval|int|null  $ttl
      * @return TValue|mixed
      */
@@ -82,9 +82,7 @@ class Refresh
         if ($store instanceof LockProvider) {
             return $store
                 ->lock($this->name, $this->seconds, $this->owner)
-                ->block($this->wait, function (): mixed {
-                    return $this->refresh();
-                });
+                ->block($this->wait, Closure::fromCallable([$this, 'refresh']));
         }
 
         return $this->refresh();
@@ -97,7 +95,7 @@ class Refresh
      */
     protected function refresh(): mixed
     {
-        $expire = $this->expireObject();
+        $expire = new Expire($this->ttl);
 
         $item = $this->repository->get($this->key);
 
@@ -111,15 +109,5 @@ class Refresh
                 $this->repository->put($this->key, $result, $expire->at);
             }
         });
-    }
-
-    /**
-     * Creates a simple object to manage the item lifetime.
-     *
-     * @return \Laragear\CacheRefresh\Expire
-     */
-    protected function expireObject(): Expire
-    {
-        return new Expire($this->ttl);
     }
 }
