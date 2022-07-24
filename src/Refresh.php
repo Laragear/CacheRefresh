@@ -11,8 +11,7 @@ use Illuminate\Contracts\Cache\Repository;
 /**
  * @template TValue The value being refreshed
  */
-class Refresh
-{
+class Refresh {
     /**
      * Create a new refresh operation instance.
      *
