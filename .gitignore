@@ -1,5 +1,4 @@
 .idea
-.github/assets
 build
 vendor
 coverage
