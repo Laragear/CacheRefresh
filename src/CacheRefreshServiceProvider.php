@@ -22,7 +22,7 @@ class CacheRefreshServiceProvider extends ServiceProvider
         Repository::macro(
             'refresh',
             function (string $key, Closure $callback = null, DateTime|DateInterval|int|null $ttl = null): mixed {
-                /** @extends \Illuminate\Cache\Repository */
+                /** @var \Illuminate\Cache\Repository $this */
                 $operation = new Refresh($this, $key, $ttl);
 
                 return $callback ? $operation->put($callback, $ttl) : $operation;

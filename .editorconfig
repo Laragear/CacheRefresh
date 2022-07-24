@@ -10,9 +10,15 @@ indent_style = space
 end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
+block_comment_start = /*
+block_comment = *
+block_comment_end = */
 
 [*.md]
 trim_trailing_whitespace = false
 
 [*.yml]
 indent_size = 2
+
+[phpunit.xml]
+indent_size = unset
