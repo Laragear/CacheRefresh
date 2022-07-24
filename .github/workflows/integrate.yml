@@ -6,12 +6,12 @@ on:
   push:
     branches:
       - "1.x"
-  pull_request: null
+  pull_request:
 
 jobs:
   byte_level:
     name: "0️⃣ Byte-level"
-    runs-on: "ubuntu-20.04"
+    runs-on: "ubuntu-latest"
     steps:
       - name: "Checkout code"
         uses: "actions/checkout@v3"
@@ -26,7 +26,7 @@ jobs:
 
   syntax_errors:
     name: "1️⃣ Syntax errors"
-    runs-on: "ubuntu-20.04"
+    runs-on: "ubuntu-latest"
     steps:
       - name: "Set up PHP"
         uses: "shivammathur/setup-php@v2"
@@ -50,7 +50,7 @@ jobs:
     needs:
       - "byte_level"
       - "syntax_errors"
-    runs-on: "ubuntu-20.04"
+    runs-on: "ubuntu-latest"
     strategy:
       matrix:
         php-version:
@@ -70,10 +70,6 @@ jobs:
       - name: "Checkout code"
         uses: "actions/checkout@v3"
 
-#      - name: "Set Laravel version"
-#        run: |
-#          composer require --no-progress --no-update "laravel/framework:${{ matrix.laravel }}"
-
       - name: "Install dependencies"
         uses: "ramsey/composer-install@v2"
         with:
@@ -81,11 +77,6 @@ jobs:
 
       - name: "Execute unit tests"
         run: "composer run-script test"
-        # @TODO Functional tests
-
-#      - name: "Tests have failed: display logs"
-#        if: "${{ failure() }}"
-#        run: "cat storage/logs/*.log"
 
       - name: "Upload coverage to Codecov"
         uses: "codecov/codecov-action@v2"
@@ -95,7 +86,7 @@ jobs:
     needs:
       - "byte_level"
       - "syntax_errors"
-    runs-on: "ubuntu-20.04"
+    runs-on: "ubuntu-latest"
     steps:
       - name: "Set up PHP"
         uses: "shivammathur/setup-php@v2"
@@ -117,38 +108,12 @@ jobs:
         run: "composer exec -- phpstan analyze -l 5 src/"
         # @TODO Magic Number Detector, Copy-Paste Detector
 
-  coding_standards:
-    name: "4️⃣ Coding Standards"
-    needs:
-      - "byte_level"
-      - "syntax_errors"
-    runs-on: "ubuntu-20.04"
-    steps:
-      - name: "Set up PHP"
-        uses: "shivammathur/setup-php@v2"
-        with:
-          php-version: "8.0"
-
-      - name: "Checkout code"
-        uses: "actions/checkout@v3"
-
-      - name: "Check adherence to EditorConfig"
-        uses: "greut/eclint-action@v0"
-
-      - name: "Install dependencies"
-        uses: "ramsey/composer-install@v2"
-        with:
-          dependency-versions: "highest"
-
-      - name: "Check coding style"
-        run: "composer exec -- php-cs-fixer fix --dry-run --diff --rules=@PSR12 src/"
-
   exported_files:
-    name: "5️⃣ Exported files"
+    name: "4️⃣ Exported files"
     needs:
       - "byte_level"
       - "syntax_errors"
-    runs-on: "ubuntu-20.04"
+    runs-on: "ubuntu-latest"
     steps:
       - name: "Checkout code"
         uses: "actions/checkout@v3"
