@@ -1,11 +1,9 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow
 
-name: "Integrate"
+name: "Tests"
 
 on:
   push:
-    branches:
-      - "1.x"
   pull_request:
 
 jobs:
@@ -106,7 +104,6 @@ jobs:
 
       - name: "Execute static analysis"
         run: "composer exec -- phpstan analyze -l 5 src/"
-        # @TODO Magic Number Detector, Copy-Paste Detector
 
   exported_files:
     name: "4️⃣ Exported files"
