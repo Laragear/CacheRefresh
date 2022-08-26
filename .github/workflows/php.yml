@@ -1,12 +1,13 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow
 
-name: "Tests"
+name: Tests
 
 on:
   push:
   pull_request:
 
 jobs:
+
   byte_level:
     name: "0️⃣ Byte-level"
     runs-on: "ubuntu-latest"
@@ -17,10 +18,9 @@ jobs:
       - name: "Check file permissions"
         run: |
           test "$(find . -type f -not -path './.git/*' -executable)" == ""
-
       - name: "Find non-printable ASCII characters"
         run: |
-          ! LC_ALL=C.UTF-8 find . -type f -name "*.php" -print0 | xargs -0 -- grep -PHn "[^ -~]"
+          ! LC_ALL=C.UTF-8 find ./src -type f -name "*.php" -print0 | xargs -0 -- grep -PHn "[^ -~]"
 
   syntax_errors:
     name: "1️⃣ Syntax errors"
@@ -29,22 +29,20 @@ jobs:
       - name: "Set up PHP"
         uses: "shivammathur/setup-php@v2"
         with:
-          php-version: "latest"
+          php-version: "8.1"
+          tools: "parallel-lint"
 
       - name: "Checkout code"
         uses: "actions/checkout@v3"
 
-      - name: "Install dependencies"
-        uses: "ramsey/composer-install@v2"
-        with:
-          dependency-versions: "highest"
+      - name: "Validate Composer configuration"
+        run: "composer validate --strict"
 
       - name: "Check source code for syntax errors"
         run: "composer exec -- parallel-lint src/"
-        # @TODO Check template files for syntax errors
 
   unit_tests:
-    name: "2️⃣ Unit and functional tests"
+    name: "2️⃣ Unit and Feature tests"
     needs:
       - "byte_level"
       - "syntax_errors"
@@ -64,6 +62,8 @@ jobs:
         uses: "shivammathur/setup-php@v2"
         with:
           php-version: "${{ matrix.php-version }}"
+          extensions: mbstring, intl
+          coverage: xdebug
 
       - name: "Checkout code"
         uses: "actions/checkout@v3"
@@ -89,18 +89,14 @@ jobs:
       - name: "Set up PHP"
         uses: "shivammathur/setup-php@v2"
         with:
+          tools: "phpstan"
           php-version: "latest"
 
       - name: "Checkout code"
         uses: "actions/checkout@v3"
 
-      - name: "Validate Composer configuration"
-        run: "composer validate --strict"
-
       - name: "Install dependencies"
         uses: "ramsey/composer-install@v2"
-        with:
-          dependency-versions: "highest"
 
       - name: "Execute static analysis"
         run: "composer exec -- phpstan analyze -l 5 src/"
@@ -118,7 +114,7 @@ jobs:
       - name: "Check exported files"
         run: |
           EXPECTED="LICENSE.md,README.md,composer.json"
-          CURRENT="$(git archive HEAD | tar --list --exclude="src" --exclude="src/*" --exclude=".stubs" --exclude=".stubs/*" | paste -s -d ",")"
+          CURRENT="$(git archive HEAD | tar --list --exclude="src" --exclude="src/*" --exclude=".stubs" --exclude=".stubs/*"  --exclude="routes" --exclude="routes/*" --exclude="stubs" --exclude="stubs/*" --exclude="lang" --exclude="lang/*" --exclude="config" --exclude="config/*" --exclude="database" --exclude="database/*" --exclude="resources" --exclude="resources/*" | paste -s -d ",")"
           echo "CURRENT =${CURRENT}"
           echo "EXPECTED=${EXPECTED}"
           test "${CURRENT}" == "${EXPECTED}"
