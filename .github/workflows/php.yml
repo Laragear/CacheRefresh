@@ -55,7 +55,7 @@ jobs:
           - "8.2"
         laravel-constraint:
           - "9.*"
-          - "10"
+          - "10.*"
         dependencies:
           - "lowest"
           - "highest"
