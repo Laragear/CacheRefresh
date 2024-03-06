@@ -5,8 +5,9 @@ namespace Laragear\CacheRefresh;
 use Closure;
 use DateInterval;
 use DateTimeInterface;
-use Illuminate\Contracts\Cache\LockProvider;
-use Illuminate\Contracts\Cache\Repository;
+use Illuminate\Contracts\Cache\LockProvider as LockContract;
+use Illuminate\Contracts\Cache\Repository as CacheContract;
+use function tap;
 
 /**
  * @template TValue The value being refreshed
@@ -16,17 +17,10 @@ class Refresh
     /**
      * Create a new refresh operation instance.
      *
-     * @param  \Illuminate\Contracts\Cache\Repository  $repository
-     * @param  string  $key
-     * @param  \DateTimeInterface|\DateInterval|int|null  $ttl
-     * @param  string  $name
-     * @param  string  $owner
      * @param  (\Closure(TValue|mixed|null, \Laragear\CacheRefresh\Expire):TValue)|null  $callback
-     * @param  int  $wait
-     * @param  int  $seconds
      */
     public function __construct(
-        protected Repository $repository,
+        protected CacheContract $repository,
         protected string $key,
         protected DateTimeInterface|DateInterval|int|null $ttl = null,
         protected string $name = '',
@@ -41,9 +35,6 @@ class Refresh
     /**
      * Changes cache lock configuration.
      *
-     * @param  string  $name
-     * @param  int|null  $seconds
-     * @param  string|null  $owner
      * @return $this
      */
     public function lock(string $name, int $seconds = null, string $owner = null): static
@@ -56,7 +47,6 @@ class Refresh
     /**
      * Sets the seconds to wait to acquire the lock.
      *
-     * @param  int  $seconds
      * @return $this
      */
     public function waitFor(int $seconds): static
@@ -70,7 +60,6 @@ class Refresh
      * Retrieves and refreshes the item from the cache through a callback.
      *
      * @param  \Closure(TValue|null|mixed, \Laragear\CacheRefresh\Expire): TValue  $callback
-     * @param  \DateTimeInterface|\DateInterval|int|null  $ttl
      * @return TValue|mixed
      */
     public function put(Closure $callback, DateTimeInterface|DateInterval|int|null $ttl = null): mixed
@@ -79,7 +68,7 @@ class Refresh
 
         $store = $this->repository->getStore();
 
-        if ($store instanceof LockProvider) {
+        if ($store instanceof LockContract) {
             return $store
                 ->lock($this->name, $this->seconds, $this->owner)
                 ->block($this->wait, Closure::fromCallable([$this, 'refresh']));

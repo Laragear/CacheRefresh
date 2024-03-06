@@ -5,7 +5,7 @@
 [![Codecov coverage](https://codecov.io/gh/Laragear/CacheRefresh/branch/1.x/graph/badge.svg?token=OUUWluNbr6)](https://codecov.io/gh/Laragear/CacheRefresh)
 [![Maintainability](https://api.codeclimate.com/v1/badges/6fb0cc168f26b3f245bc/maintainability)](https://codeclimate.com/github/Laragear/CacheRefresh/maintainability)
 [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=Laragear_CacheRefresh&metric=alert_status)](https://sonarcloud.io/dashboard?id=Laragear_CacheRefresh)
-[![Laravel Octane Compatibility](https://img.shields.io/badge/Laravel%20Octane-Compatible-success?style=flat&logo=laravel)](https://laravel.com/docs/9.x/octane#introduction)
+[![Laravel Octane Compatibility](https://img.shields.io/badge/Laravel%20Octane-Compatible-success?style=flat&logo=laravel)](https://laravel.com/docs/11.x/octane#introduction)
 
 Refresh items in your cache without data races.
 
@@ -32,11 +32,12 @@ can **[spread the word!](http://twitter.com/share?text=I%20am%20using%20this%20c
 
 ## Requirements
 
-* PHP 8 or later
-* Laravel 9, 10 or later
+* Laravel 10 or later
 * Cache Driver with Lock support (*).
 
-> **Warning** You can still use Cache Refresh without a driver that supports locking, but bear in mind, **refreshing won't be atomic**.
+> [!WARNING]
+> 
+> You can still use Cache Refresh without a driver that supports locking, but bear in mind, **refreshing won't be atomic**.
 
 ## Installation
 
@@ -141,4 +142,4 @@ If you discover any security related issues, please email darkghosthunter@gmail.
 
 This specific package version is licensed under the terms of the [MIT License](LICENSE.md), at time of publishing.
 
-[Laravel](https://laravel.com) is a Trademark of [Taylor Otwell](https://github.com/TaylorOtwell/). Copyright © 2011-2022 Laravel LLC.
+[Laravel](https://laravel.com) is a Trademark of [Taylor Otwell](https://github.com/TaylorOtwell/). Copyright © 2011-2024 Laravel LLC.

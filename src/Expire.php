@@ -8,9 +8,7 @@ use DateTimeInterface;
 class Expire
 {
     /**
-     * Create a new Expire instance.
-     *
-     * @param  \DateTimeInterface|\DateInterval|int|null  $at
+     * Create a new expire instance.
      */
     public function __construct(public DateTimeInterface|DateInterval|int|null $at)
     {
@@ -19,9 +17,6 @@ class Expire
 
     /**
      * Expires the cache key at the given time or seconds.
-     *
-     * @param  \DateTimeInterface|\DateInterval|int|null  $at
-     * @return void
      */
     public function at(DateTimeInterface|DateInterval|int|null $at): void
     {
@@ -30,8 +25,6 @@ class Expire
 
     /**
      * Expires the cache immediately, removing it from the cache.
-     *
-     * @return void
      */
     public function now(): void
     {
@@ -40,8 +33,6 @@ class Expire
 
     /**
      * Persists the new value forever in the cache.
-     *
-     * @return void
      */
     public function never(): void
     {
