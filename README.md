@@ -1,3 +1,7 @@
+# This package has been superseded by [Laravel Cache Atomic Lock](https://laravel.com/docs/cache#atomic-locks).
+
+---
+
 # Cache Refresh
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/laragear/cache-refresh.svg)](https://packagist.org/packages/laragear/cache-refresh)
